@@ -17,6 +17,7 @@ public Integer findNumbers(PadNumber start, Integer digits)
     if(start == null || "*".equals(start.getNumber()) || "#".equals(start.getNumber()) ) { throw new IllegalArgumentException("Invalid start point"); }
     
     if(digits == 1) { return 1; };
+    if(digits == 0) { return 0; };
     //System.out.println(start.getNumber());
     //Init
     this.movesFrom = new int[thePad.length * thePad[0].length];

@@ -53,7 +53,7 @@ public final class PhoneChess {
 	    thePad[3][1] = new PadNumber("0", new Point(1,3));
 	    thePad[3][2] = new PadNumber("#", new Point(2,3));
 
-	    PhoneChess phoneChess = new PhoneChess(thePad, "Knight");
-	    System.out.println(phoneChess.findPossibleDigits(thePad[1][1],10));
+	    PhoneChess phoneChess = new PhoneChess(thePad, "Pawn");
+	    System.out.println(phoneChess.findPossibleDigits(thePad[2][1],3));
 	}
 }

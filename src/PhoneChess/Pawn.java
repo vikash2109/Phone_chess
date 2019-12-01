@@ -3,9 +3,18 @@ package PhoneChess;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import javax.annotation.Generated;
 
 public final class Pawn extends ChessPiece implements Movement {
 
+@Generated("SparkTools")
+	private Pawn(Builder builder) {
+		this.name = builder.name;
+		this.moves = builder.moves;
+		this.fullNumbers = builder.fullNumbers;
+		this.movesFrom = builder.movesFrom;
+		this.thePad = builder.thePad;
+	}
 /**Knight movements
  * One horizontal, followed by two vertical
  * Or 
@@ -22,52 +31,98 @@ public Pawn(String name, PadNumber[][] thePad)
     this.thePad = thePad;
     this.moves = new HashMap<>();
 }
-
 @Override
-public List<PadNumber> allowedMoves(PadNumber from) 
-{
-    //First encounter
-    if(this.moves == null)
-        this.moves = new HashMap<>();
+public Integer findNumbers(PadNumber start, Integer digits) 
+{	
+    if(start == null || "*".equals(start.getNumber()) || "#".equals(start.getNumber()) ) { throw new IllegalArgumentException("Invalid start point"); }
+    
+    if(digits == 1) { return 1; };
+    //System.out.println(start.getNumber());
+    //Init
 
-
-    if(this.moves.containsKey(from))
-        return this.moves.get(from);
-    else
-    {
-        List<PadNumber> found = new ArrayList<>();
-        int row = from.getY();//rows
-        int col = from.getX();//columns
-
-        //Cases:
-        //1. One horizontal move each way followed by two vertical moves each way
-        for(int i=0;i<4;i++) {
-        	for(int j=0;j<3;j++) {
-        		if(thePad[i][j].getNumber().equals("*") == false && 
-                        thePad[i][j].getNumber().equals("#") == false && !(i==row && j==col)) {
-        			
-        			if(isValMove(from,thePad[i][j])) {
-        				found.add(thePad[i][j]);
-                        this.movesFrom[from.getNumberAsNumber()] = this.movesFrom[from.getNumberAsNumber()] + 1;
-
-        			}
-        		}
-        	}
-        }
-        
-        if(found.size() > 0)
-        {
-            this.moves.put(from, found);
-            this.movesFrom[from.getNumberAsNumber()] = found.size();
-        }
-        else
-        {
-            this.moves.put(from, null); //for example the Knight cannot move from 5 to anywhere
-            this.movesFrom[from.getNumberAsNumber()] = 0;
-        }
+    int row = start.getY();//rows
+    int col = start.getX();//columns
+    fullNumbers = 0;
+    if (row == 0) {
+    	fullNumbers = findCount(thePad[0][col] , digits);
+    } else if( row == 1) {
+    	fullNumbers = findCount(thePad[0][col] , digits - 1 );
     }
-
-    return this.moves.get(from);
+    
+  
+    else if(row == 2) {
+	fullNumbers += findCount(thePad[0][col] ,  digits - 1  )  ;
+	if(digits > 1) {
+		fullNumbers += findCount(thePad[0][col] ,  digits - 2);
+	}
+}
+    if(row == 3) {
+   
+	fullNumbers += findCount(thePad[0][col] ,  digits - 2) ;
+	if(digits >= 1) {
+		fullNumbers += findCount(thePad[0][col] ,  digits - 3);
+	}
+}
+    return fullNumbers;
 }
 
+public Integer findCount(PadNumber start, Integer digits) {
+	if(digits <= 0) {
+		return 1;
+	}
+	PhoneChess phoneChess = new PhoneChess(thePad, "Queen");
+	return phoneChess.findPossibleDigits(start, digits);
+}
+/**
+ * Creates builder to build {@link Pawn}.
+ * @return created builder
+ */
+@Generated("SparkTools")
+public static Builder builder() {
+	return new Builder();
+}
+
+/**
+ * Builder to build {@link Pawn}.
+ */
+@Generated("SparkTools")
+public static final class Builder {
+	private String name;
+	private HashMap<PadNumber, List<PadNumber>> moves;
+	private Integer fullNumbers;
+	private int[] movesFrom;
+	private PadNumber[][] thePad;
+
+	private Builder() {
+	}
+
+	public Builder withName(String name) {
+		this.name = name;
+		return this;
+	}
+
+	public Builder withMoves(HashMap<PadNumber, List<PadNumber>> moves) {
+		this.moves = moves;
+		return this;
+	}
+
+	public Builder withFullNumbers(Integer fullNumbers) {
+		this.fullNumbers = fullNumbers;
+		return this;
+	}
+
+	public Builder withMovesFrom(int[] movesFrom) {
+		this.movesFrom = movesFrom;
+		return this;
+	}
+
+	public Builder withThePad(PadNumber[][] thePad) {
+		this.thePad = thePad;
+		return this;
+	}
+
+	public Pawn build() {
+		return new Pawn(this);
+	}
+}
 }
