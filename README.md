@@ -41,7 +41,7 @@ King, Queen, Bishop, Knight, Rook, Pawn: Concrete class that inherits from Chess
 PhoneChess: Entrance class.
 
 #Running Instruction:
-1)In Drive Clsss(i.e PhoneChess) you can change in input type and will get relevent output
+1)In Drive Clsss(i.e PhoneChess) you can change in input type of Drive Class(i.e PhoneChess ) Constructor with any piece (King, Queen, Bishop, Knight, Rook, Pawn) and will get relevent output.
 2)Implementation of program is such: you can change th number of digit (i.e number of digit in mobile number), by default it will be 10 but you can change as per your requirements.
 
 
