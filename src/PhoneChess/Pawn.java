@@ -7,20 +7,6 @@ import javax.annotation.Generated;
 
 public final class Pawn extends ChessPiece implements Movement {
 
-@Generated("SparkTools")
-	private Pawn(Builder builder) {
-		this.name = builder.name;
-		this.moves = builder.moves;
-		this.fullNumbers = builder.fullNumbers;
-		this.movesFrom = builder.movesFrom;
-		this.thePad = builder.thePad;
-	}
-/**Knight movements
- * One horizontal, followed by two vertical
- * Or 
- * One vertical, followed by two horizontal
- * @param name
- */
 
 public Pawn(String name, PadNumber[][] thePad)
 {
@@ -72,57 +58,5 @@ public Integer findCount(PadNumber start, Integer digits) {
 	}
 	PhoneChess phoneChess = new PhoneChess(thePad, "Queen");
 	return phoneChess.findPossibleDigits(start, digits);
-}
-/**
- * Creates builder to build {@link Pawn}.
- * @return created builder
- */
-@Generated("SparkTools")
-public static Builder builder() {
-	return new Builder();
-}
-
-/**
- * Builder to build {@link Pawn}.
- */
-@Generated("SparkTools")
-public static final class Builder {
-	private String name;
-	private HashMap<PadNumber, List<PadNumber>> moves;
-	private Integer fullNumbers;
-	private int[] movesFrom;
-	private PadNumber[][] thePad;
-
-	private Builder() {
-	}
-
-	public Builder withName(String name) {
-		this.name = name;
-		return this;
-	}
-
-	public Builder withMoves(HashMap<PadNumber, List<PadNumber>> moves) {
-		this.moves = moves;
-		return this;
-	}
-
-	public Builder withFullNumbers(Integer fullNumbers) {
-		this.fullNumbers = fullNumbers;
-		return this;
-	}
-
-	public Builder withMovesFrom(int[] movesFrom) {
-		this.movesFrom = movesFrom;
-		return this;
-	}
-
-	public Builder withThePad(PadNumber[][] thePad) {
-		this.thePad = thePad;
-		return this;
-	}
-
-	public Pawn build() {
-		return new Pawn(this);
-	}
 }
 }
