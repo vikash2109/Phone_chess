@@ -24,67 +24,6 @@ public Knight(String name, PadNumber[][] thePad)
 }
 
 
-private Integer fullNumbers = null;
-
-@Override
-public Integer findNumbers(PadNumber start, Integer digits) 
-{	
-    if(start == null || "*".equals(start.getNumber()) || "#".equals(start.getNumber()) ) { throw new IllegalArgumentException("Invalid start point"); }
-    if(start.getNumberAsNumber() == 5) { return 0; } //Consider adding an 'allowSpecialChars' condition
-    if(digits == 1) { return 1; };
-    System.out.println(start.getNumber());
-    //Init
-    this.movesFrom = new int[thePad.length * thePad[0].length];
-    for(int i = 0; i < this.movesFrom.length; i++)
-        this.movesFrom[i] = -1;
-
-    fullNumbers = 0;
-    findNumbers(start, digits, 1);      
-    return fullNumbers;
-}
-
-private void findNumbers(PadNumber start, Integer digits, Integer currentDigits)
-{
-    //Base condition
-    if(currentDigits == digits)
-    {
-        //Reset
-        currentDigits = 1; 
-        fullNumbers++; 
-        return; 
-    }
-    if(!this.moves.containsKey(start))
-        allowedMoves(start);
-
-    List<PadNumber> options = this.moves.get(start);
-    if(options != null)
-    {
-        currentDigits++; //More digits to be got
-        for(PadNumber option : options)
-            findNumbers(option, digits, currentDigits);
-    }
-}
-
-@Override
-public boolean canMove(PadNumber from, PadNumber to) 
-{
-    //Is the moves list available?
-    if(!this.moves.containsKey(from.getNumber()))
-    {
-        //No? Process.
-        allowedMoves(from);
-    }
-    if(this.moves.get(from) != null)
-    {
-        for(PadNumber option : this.moves.get(from))
-        {
-            if(option.getNumber().equals(to.getNumber()))
-                return true;
-        }
-    }
-    return false;
-
-}
 
 /***
  * Overriden method that defines each Piece's movement restrictions.
@@ -185,25 +124,4 @@ public List<PadNumber> allowedMoves(PadNumber from)
 
 
 }
-
-@Override
-public Integer countAllowedMoves(PadNumber from) 
-{
-    int start = from.getNumberAsNumber();
-
-    if(movesFrom[start] != -1)
-        return movesFrom[start];
-    else
-    {
-        movesFrom[start] = allowedMoves(from).size();
-    }
-    return movesFrom[start];
-}
-
-@Override
-public String toString()
-{
-    return this.name;
-}
-
 }

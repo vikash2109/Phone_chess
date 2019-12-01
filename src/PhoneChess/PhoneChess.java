@@ -54,6 +54,6 @@ public final class PhoneChess {
 	    thePad[3][2] = new PadNumber("#", new Point(2,3));
 
 	    PhoneChess phoneChess = new PhoneChess(thePad, "Rook");
-	    System.out.println(phoneChess.findPossibleDigits(thePad[3][1],3));
+	    System.out.println(phoneChess.findPossibleDigits(thePad[1][1],3));
 	}
 }

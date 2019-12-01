@@ -14,6 +14,19 @@ public class PieceFactory
     
     else if(piece.equalsIgnoreCase("Rook"))
         return new Rook("Rook", thePad);
+    
+    else if(piece.equalsIgnoreCase("Bishop"))
+        return new Bishop("Bishop", thePad);
+    
+    else if(piece.equalsIgnoreCase("King"))
+        return new King("King", thePad);
+    
+    else if(piece.equalsIgnoreCase("Queen"))
+        return new Queen("Queen", thePad);
+    
+    else if(piece.equalsIgnoreCase("Pawn"))
+        return new Pawn("Pawn", thePad);
+    
     else
         return null;
 }
