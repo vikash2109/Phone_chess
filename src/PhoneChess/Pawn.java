@@ -23,11 +23,7 @@ public Pawn(String name, PadNumber[][] thePad)
     this.moves = new HashMap<>();
 }
 
-
-private Integer fullNumbers = null;
-/***
- * Overriden method that defines each Piece's movement restrictions.
- */
+@Override
 public List<PadNumber> allowedMoves(PadNumber from) 
 {
     //First encounter
@@ -45,117 +41,20 @@ public List<PadNumber> allowedMoves(PadNumber from)
 
         //Cases:
         //1. One horizontal move each way followed by two vertical moves each way
-        if(from.getNumberAsNumber() == 0)
-        {
+        for(int i=0;i<4;i++) {
+        	for(int j=0;j<3;j++) {
+        		if(thePad[i][j].getNumber().equals("*") == false && 
+                        thePad[i][j].getNumber().equals("#") == false && !(i==row && j==col)) {
+        			
+        			if(isValMove(from,thePad[i][j])) {
+        				found.add(thePad[i][j]);
+                        this.movesFrom[from.getNumberAsNumber()] = this.movesFrom[from.getNumberAsNumber()] + 1;
 
-                found.add(thePad[0][1]);
-                found.add(thePad[1][1]);
-                found.add(thePad[2][1]);
-                this.movesFrom[from.getNumberAsNumber()] = this.movesFrom[from.getNumberAsNumber()] + 3;
-
-
+        			}
+        		}
+        	}
         }
-        if(from.getNumberAsNumber() == 1 )
-        {
-                found.add(thePad[0][1]);
-                found.add(thePad[0][2]);
-                found.add(thePad[1][0]);
-                found.add(thePad[2][0]);
-                this.movesFrom[from.getNumberAsNumber()] = this.movesFrom[from.getNumberAsNumber()] + 4;
-
-
-        }
-        if(from.getNumberAsNumber() == 4 )
-        {
-
-                found.add(thePad[1][1]);
-                found.add(thePad[1][2]);
-                found.add(thePad[0][0]);
-                found.add(thePad[2][0]);
-                this.movesFrom[from.getNumberAsNumber()] = this.movesFrom[from.getNumberAsNumber()] + 4;
-
-
-        }
-        if(from.getNumberAsNumber() == 7 )
-        {
-
-                found.add(thePad[2][1]);
-                found.add(thePad[2][2]);
-                found.add(thePad[1][0]);
-                found.add(thePad[0][0]);
-                this.movesFrom[from.getNumberAsNumber()] = this.movesFrom[from.getNumberAsNumber()] + 4;
-
-
-        }
-        if(from.getNumberAsNumber() == 2 )
-        {
-
-                found.add(thePad[0][0]);
-                found.add(thePad[0][2]);
-                found.add(thePad[1][1]);
-                found.add(thePad[2][1]);
-                found.add(thePad[3][1]);
-                this.movesFrom[from.getNumberAsNumber()] = this.movesFrom[from.getNumberAsNumber()] + 5;
-
-
-        }
-        if(from.getNumberAsNumber() == 5 )
-        {
-
-        	found.add(thePad[1][0]);
-            found.add(thePad[1][2]);
-            found.add(thePad[0][1]);
-            found.add(thePad[2][1]);
-            found.add(thePad[3][1]);
-            this.movesFrom[from.getNumberAsNumber()] = this.movesFrom[from.getNumberAsNumber()] + 5;
-
-
-        }
-        if(from.getNumberAsNumber() == 8 )
-        {
-
-        	found.add(thePad[2][0]);
-            found.add(thePad[2][2]);
-            found.add(thePad[1][1]);
-            found.add(thePad[0][1]);
-            found.add(thePad[3][1]);
-                this.movesFrom[from.getNumberAsNumber()] = this.movesFrom[from.getNumberAsNumber()] + 5;
-
-
-        }
-        if(from.getNumberAsNumber() == 3 )
-        {
-
-                found.add(thePad[0][0]);
-                found.add(thePad[0][1]);
-                found.add(thePad[1][2]);
-                found.add(thePad[2][2]);
-                this.movesFrom[from.getNumberAsNumber()] = this.movesFrom[from.getNumberAsNumber()] + 4;
-
-
-        }
-        if(from.getNumberAsNumber() == 6 )
-        {
-
-        	found.add(thePad[1][0]);
-            found.add(thePad[1][1]);
-            found.add(thePad[0][2]);
-            found.add(thePad[2][2]);
-                this.movesFrom[from.getNumberAsNumber()] = this.movesFrom[from.getNumberAsNumber()] + 4;
-
-
-        }
-        if(from.getNumberAsNumber() == 9 )
-        {
-
-        	found.add(thePad[2][0]);
-            found.add(thePad[2][1]);
-            found.add(thePad[1][2]);
-            found.add(thePad[0][2]);
-                this.movesFrom[from.getNumberAsNumber()] = this.movesFrom[from.getNumberAsNumber()] + 4;
-
-
-        }
+        
         if(found.size() > 0)
         {
             this.moves.put(from, found);
@@ -169,8 +68,6 @@ public List<PadNumber> allowedMoves(PadNumber from)
     }
 
     return this.moves.get(from);
-
-
 }
 
 }

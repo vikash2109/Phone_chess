@@ -35,7 +35,7 @@ private void findNumbers(PadNumber start, Integer digits, Integer currentDigits,
     //Base condition
     if(currentDigits == digits)
     {
-    	System.out.println(num);
+    	//System.out.println(num);
         //Reset
         currentDigits = 1; 
         fullNumbers++; 
