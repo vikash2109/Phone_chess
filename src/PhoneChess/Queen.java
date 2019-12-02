@@ -4,13 +4,6 @@ import java.util.HashMap;
 
 public final class Queen extends ChessPiece implements Movement {
 
-/**Knight movements
- * One horizontal, followed by two vertical
- * Or 
- * One vertical, followed by two horizontal
- * @param name
- */
-
 public Queen(String name, PadNumber[][] thePad)
 {
     if(name == null || name.isEmpty() == true)
@@ -22,9 +15,6 @@ public Queen(String name, PadNumber[][] thePad)
 }
 
 
-/***
- * Overriden method that defines each Piece's movement restrictions.
- */
 @Override
 boolean isValMove(PadNumber from, PadNumber to) {
 	

@@ -4,12 +4,6 @@ import java.util.HashMap;
 
 public final class Bishop extends ChessPiece implements Movement {
 
-/**Knight movements
- * One horizontal, followed by two vertical
- * Or 
- * One vertical, followed by two horizontal
- * @param name
- */
 
 public Bishop(String name, PadNumber[][] thePad)
 {
@@ -21,10 +15,6 @@ public Bishop(String name, PadNumber[][] thePad)
     this.moves = new HashMap<>();
 }
 
-
-/***
- * Overriden method that defines each Piece's movement restrictions.
- */
 @Override
 boolean isValMove(PadNumber from, PadNumber to) {
 	

@@ -31,11 +31,6 @@ public final class PhoneChess {
 	    return thePiece.findNumbers(start, digits);
 	}
 
-	public boolean isValidMove(PadNumber from, PadNumber to)
-	{
-	    return this.thePiece.canMove(from, to);
-	}
-
 	public static void main(String[] args) {
 
 
@@ -56,7 +51,7 @@ public final class PhoneChess {
 	    //Driver code to run.
 	    PhoneChess phoneChess = new PhoneChess(thePad, "Knight"); //here you can change knight with any chess piece (King, Queen, Bishop, Knight, Rook, Pawn)
 	    
-	    System.out.println(phoneChess.findPossibleDigits(thePad[2][1],10)); // here you can change the starting position of phone Keypad(i.e thePad[i][j]) and number of digits(by default it is 10)
+	    System.out.println(phoneChess.findPossibleDigits(thePad[0][0],10)); // here you can change the starting position of phone Keypad(i.e thePad[i][j]) and number of digits(by default it is 10)
 	    
 	}
 }

@@ -1,9 +1,7 @@
 package PhoneChess;
 
-import java.util.ArrayList;
+
 import java.util.HashMap;
-import java.util.List;
-import javax.annotation.Generated;
 
 public final class Pawn extends ChessPiece implements Movement {
 
@@ -24,7 +22,7 @@ public Integer findNumbers(PadNumber start, Integer digits)
     
     if(digits == 1) { return 1; };
     //System.out.println(start.getNumber());
-    //Init
+    
 
     int row = start.getY();//rows
     int col = start.getX();//columns

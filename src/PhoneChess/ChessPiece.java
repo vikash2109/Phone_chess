@@ -19,7 +19,7 @@ public Integer findNumbers(PadNumber start, Integer digits)
     if(digits == 1) { return 1; };
     if(digits == 0) { return 0; };
     //System.out.println(start.getNumber());
-    //Init
+ 
     this.movesFrom = new int[thePad.length * thePad[0].length];
     for(int i = 0; i < this.movesFrom.length; i++)
         this.movesFrom[i] = -1;
@@ -57,40 +57,6 @@ private void findNumbers(PadNumber start, Integer digits, Integer currentDigits,
     }}
 }
 
-@Override
-public boolean canMove(PadNumber from, PadNumber to) 
-{
-    //Is the moves list available?
-    if(!this.moves.containsKey(from.getNumber()))
-    {
-        //No? Process.
-        allowedMoves(from);
-    }
-    if(this.moves.get(from) != null)
-    {
-        for(PadNumber option : this.moves.get(from))
-        {
-            if(option.getNumber().equals(to.getNumber()))
-                return true;
-        }
-    }
-    return false;
-
-}
-
-public Integer countAllowedMoves(PadNumber from) 
-{
-    int start = from.getNumberAsNumber();
-
-    if(movesFrom[start] != -1)
-        return movesFrom[start];
-    else
-    {
-        movesFrom[start] = allowedMoves(from).size();
-    }
-    return movesFrom[start];
-}
-
 public List<PadNumber> allowedMoves(PadNumber from) 
 {
     //First encounter
@@ -106,8 +72,7 @@ public List<PadNumber> allowedMoves(PadNumber from)
         int row = from.getY();//rows
         int col = from.getX();//columns
 
-        //Cases:
-        //1. One horizontal move each way followed by two vertical moves each way
+        
         for(int i=0;i<4;i++) {
         	for(int j=0;j<3;j++) {
         		if(thePad[i][j].getNumber().equals("*") == false && 
